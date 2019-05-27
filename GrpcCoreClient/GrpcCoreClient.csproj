@@ -6,13 +6,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\GrpcCoreServer\Protos\greet.proto" Link="greet.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.7.0" />
     <PackageReference Include="Grpc" Version="1.21.0" />
     <PackageReference Include="Grpc.Tools" Version="1.21.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Protobuf Include="..\ApiAuth\Protos\greet.proto" GrpcServices="Client">
+      <Link>greet.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Certs\ca.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Certs\client.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Certs\client.key">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

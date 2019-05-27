@@ -21,12 +21,12 @@ namespace ApiAuth
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-
                     webBuilder
                         .ConfigureKestrel(options =>
                         {
-                            options.ListenLocalhost(5001, listenOptions =>
+                            options.ListenLocalhost(50051, listenOptions =>
                             {
+                                listenOptions.UseHttps("server.pfx", "1111");
                                 listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
                             });
                         })

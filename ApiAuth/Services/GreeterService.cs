@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Greet;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GrpcCoreServer
+namespace ApiAuth.Services
 {
     public class GreeterService : Greeter.GreeterBase
     {

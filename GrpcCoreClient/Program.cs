@@ -1,21 +1,29 @@
 ﻿using System;
-using Greet;
+using System.IO;
+using ApiAuth;
 using Grpc.Core;
 
 namespace GrpcCoreClient
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            
+            var channelCredentials = new SslCredentials(
+                File.ReadAllText("Certs\\ca.crt"),
+                new KeyCertificatePair(
+                    File.ReadAllText("Certs\\client.crt"),
+                    File.ReadAllText("Certs\\client.key")
+                )
+            );
 
-            Channel channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
+            var channel = new Channel("localhost:50051", channelCredentials);
 
             var client = new Greeter.GreeterClient(channel);
-            String user = "you";
 
-            var reply = client.SayHello(new HelloRequest { Name = user });
+            var user = "you";
+
+            var reply = client.SayHello(new HelloRequest {Name = user});
             Console.WriteLine("Greeting: " + reply.Message);
 
             channel.ShutdownAsync().Wait();
