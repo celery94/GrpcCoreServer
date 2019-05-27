@@ -92,7 +92,7 @@ namespace ApiAuth
                 var admin = new IdentityUser()
                 {
                     UserName = "admin",
-                    Email = "admin@contract.com"
+                    Email = "admin@admin.com"
                 };
 
                 userManager.CreateAsync(admin, "12345678").Wait();
